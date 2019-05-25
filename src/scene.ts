@@ -1,60 +1,57 @@
-import { randomInt } from "./utils";
-import { setRectangle } from "./rectangle";
+// import { randomInt } from "./utils";
+// import { setRectangle } from "./rectangle";
 
 function setGeometry(
-    gl: WebGLRenderingContext,
-    width: number,
-    height: number,
-    thickness: number
+  gl: WebGLRenderingContext,
 ) {
-    gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([
-            // left column
-            0,
+  gl.bufferData(
+    gl.ARRAY_BUFFER,
+    new Float32Array([
+      // left column
       0,
-            30,
-            0,
       0,
-            150,
+      30,
       0,
-            150,
-            30,
       0,
-            30,
-            150,
+      150,
+      0,
+      150,
+      30,
+      0,
+      30,
+      150,
 
       // top rung
-            30,
-            0,
+      30,
+      0,
       100,
-            0,
-            30,
+      0,
       30,
       30,
       30,
-            30,
-            100,
-            0,
+      30,
+      30,
       100,
-            30,
+      0,
+      100,
+      30,
 
       // middle rung
-            30,
-            60,
+      30,
+      60,
       67,
-            60,
-            30,
+      60,
+      30,
       90,
-            30,
+      30,
       90,
-            67,
-            60,
+      67,
+      60,
       67,
       90
-        ]),
+    ]),
     gl.STATIC_DRAW
-    );
+  );
 }
 
 export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
@@ -97,7 +94,7 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
       offset
     );
 
-        setGeometry(gl, 100, 150, 30);
+    setGeometry(gl);
 
     var primitiveType = gl.TRIANGLES;
     var offset = 0;

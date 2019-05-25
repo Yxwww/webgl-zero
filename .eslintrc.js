@@ -9,5 +9,5 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: ["plugin:prettier/recommended", "eslint:recommended", "plugin:@typescript-eslint/recommended"]
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"]
 };

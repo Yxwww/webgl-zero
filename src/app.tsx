@@ -1,12 +1,17 @@
+import { randomInt } from './utils';
+import { setRectangle } from './rectangle';
+
 const fragShaderSrc = `
   // fragment shaders don't have a default precision so we need
   // to pick one. mediump is a good default
   precision mediump float;
- 
+
+  uniform vec4 u_color;
+
   void main() {
     // gl_FragColor is a special variable a fragment shader
     // is responsible for setting
-    gl_FragColor = vec4(1, 0, 0.5, 1); // return redish-purple
+    gl_FragColor = u_color;
   }
  
 
@@ -89,6 +94,7 @@ export function hereWeGo(canvas: HTMLCanvasElement) {
     const vertextShader = createShader(gl, gl.VERTEX_SHADER, vertextShaderSrc);
     const fragShader = createShader(gl, gl.FRAGMENT_SHADER, fragShaderSrc);
     const program = createProgram(gl, vertextShader, fragShader);
+    var colorUniformLocation = gl.getUniformLocation(program, "u_color");
 
     // const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
     // const positionBuffer = gl.createBuffer();
@@ -157,6 +163,26 @@ export function hereWeGo(canvas: HTMLCanvasElement) {
     var offset = 0;
     var count = 6;
     gl.drawArrays(primitiveType, offset, count);
+
+    for (var ii = 0; ii < 50; ++ii) {
+        // Setup a random rectangle
+        // This will write to positionBuffer because
+        // its the last thing we bound on the ARRAY_BUFFER
+        // bind point
+        setRectangle(
+            gl, randomInt(300), randomInt(300), randomInt(300), randomInt(300));
+
+        // Set a random color.
+        gl.uniform4f(colorUniformLocation, Math.random(), Math.random(), Math.random(), 1);
+
+        // Draw the rectangle.
+        var primitiveType = gl.TRIANGLES;
+        var offset = 0;
+        var count = 6;
+        gl.drawArrays(primitiveType, offset, count);
+    }
+
+
 }
 
 

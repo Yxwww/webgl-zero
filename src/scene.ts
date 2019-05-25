@@ -52,15 +52,12 @@ function setGeometry(gl: WebGLRenderingContext, width: number, height: number, t
   }
 
 export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
-  var colorUniformLocation = gl.getUniformLocation(program, "u_color");
-  var translationLocation = gl.getUniformLocation(program, "u_translation");
+  const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
+  const colorUniformLocation = gl.getUniformLocation(program, "u_color");
+  const translationLocation = gl.getUniformLocation(program, "u_translation");
+  const rotationUniformLocation = gl.getUniformLocation(program, "u_rotation");
   return function draw() {
     console.log("drawScene");
-
-    const positionAttributeLocation = gl.getAttribLocation(
-      program,
-      "a_position"
-    );
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     var resolutionUniformLocation = gl.getUniformLocation(
@@ -74,6 +71,7 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
 
     gl.uniform4f(colorUniformLocation, 0.5, 0.5, 0.5, 1);
     gl.uniform2fv(translationLocation, [50, 50]);
+    gl.uniform2fv(rotationUniformLocation, [1, 0]);
 
     gl.enableVertexAttribArray(positionAttributeLocation);
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);

@@ -3,3 +3,6 @@ declare interface NodeModule {
     accept(path?: string, callback?: () => void): void
   }
 }
+
+type Maybe<T> = T | void;
+

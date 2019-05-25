@@ -1,6 +1,6 @@
 {
     "name": "webgl-zero",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "main": "src/index.ts",
     "repository": "git@github.com:Yxwww/webgl-zero.git",
     "author": "Yxwww <yuxi.wangcd@gmail.com>",

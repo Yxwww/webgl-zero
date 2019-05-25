@@ -14,4 +14,4 @@ document.body.appendChild(canvas);
 
 const gl = getGLRenderingContext(canvas)
 const program  = createPrograms(gl);
-drawScene(gl, program)
+drawScene(gl, program)()

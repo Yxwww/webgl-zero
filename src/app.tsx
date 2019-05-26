@@ -31,7 +31,7 @@ const vertextShaderSrc = `
 
     vec2 rotatedPosition = vec2(
       a_position.x * u_rotation.y + a_position.y * u_rotation.x,
-      a_position.y * u_rotation.y + a_position.x * u_rotation.x
+      a_position.y * u_rotation.y - a_position.x * u_rotation.x
     );
 
     vec2 position = rotatedPosition + u_translation;

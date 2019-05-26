@@ -54,7 +54,7 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
 
     gl.uniform4f(colorUniformLocation, 0.5, 0.5, 0.5, 1);
     gl.uniform2fv(translationLocation, [50, 50]);
-    gl.uniform2fv(rotationUniformLocation, [1, 0]);
+    gl.uniform2fv(rotationUniformLocation, [0.51, 0.86]);
     gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
     gl.enableVertexAttribArray(positionAttributeLocation);

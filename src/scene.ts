@@ -38,6 +38,7 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
   const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
   const colorUniformLocation = gl.getUniformLocation(program, "u_color");
   const translationLocation = gl.getUniformLocation(program, "u_translation");
+  const scaleLocation = gl.getUniformLocation(program, "u_scale");
   const rotationUniformLocation = gl.getUniformLocation(program, "u_rotation");
   const resolutionUniformLocation = gl.getUniformLocation(
     program,
@@ -52,9 +53,10 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.useProgram(program);
 
-    gl.uniform4f(colorUniformLocation, 0.5, 0.5, 0.5, 1);
+    gl.uniform4fv(colorUniformLocation, [0.5, 0.5, 0.5, 1]);
     gl.uniform2fv(translationLocation, [50, 50]);
     gl.uniform2fv(rotationUniformLocation, [0.51, 0.86]);
+    gl.uniform2fv(scaleLocation, [0.51, 0.86]);
     gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
     gl.enableVertexAttribArray(positionAttributeLocation);

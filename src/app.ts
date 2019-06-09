@@ -3,12 +3,12 @@ const fragShaderSrc = `
   // to pick one. mediump is a good default
   precision mediump float;
 
-  uniform vec4 u_color;
+  varying vec4 v_color;
 
   void main() {
     // gl_FragColor is a special variable a fragment shader
     // is responsible for setting
-    gl_FragColor = u_color;
+    gl_FragColor = v_color;
   }
  
 
@@ -17,8 +17,11 @@ const fragShaderSrc = `
 const vertextShaderSrc = `
   // an attribute will receive data from a buffer
   attribute vec4 a_position;
+  attribute vec4 a_color;
 
   uniform mat4 u_matrix;
+
+  varying vec4 v_color;
 
   // all shaders have a main function
   void main() {
@@ -27,6 +30,9 @@ const vertextShaderSrc = `
     // is responsible for setting
 
     gl_Position = u_matrix * a_position;
+
+    // Pass the color to the fragment shader.
+    v_color = a_color;
   }
 `;
 function createProgram(

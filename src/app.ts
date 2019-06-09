@@ -35,6 +35,7 @@ const vertextShaderSrc = `
     v_color = a_color;
   }
 `;
+
 function createProgram(
   gl: WebGLRenderingContext,
   vertexShader: WebGLShader,

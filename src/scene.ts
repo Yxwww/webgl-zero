@@ -21,12 +21,20 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
   const matrixUniformLocation = gl.getUniformLocation(program, 'u_matrix');
   const colorLocation = gl.getAttribLocation(program, "a_color");
 
+  const positionBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  setGeometry(gl);
+
+  // Create buffer for colors
+  var colorBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+  setColors(gl);
+
+
   return function draw() {
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     console.log("drawScene");
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
@@ -54,16 +62,9 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
     matrix = scale(matrix, scaleVec[0], scaleVec[1], scaleVec[2]);
     gl.uniformMatrix4fv(matrixUniformLocation, false, matrix);
 
-    gl.enableVertexAttribArray(positionAttributeLocation);
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-
-    // Create buffer for colors
-    var colorBuffer = gl.createBuffer();
+    // send color data
     gl.enableVertexAttribArray(colorLocation);
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-    // Put the colors in the buffer.
-    setColors(gl);
-
     // Tell the attribute how to get data out of colorBuffer (ARRAY_BUFFER)
     var size = 3;                 // 3 components per iteration
     var type = gl.UNSIGNED_BYTE;  // the data is 8bit unsigned values
@@ -71,7 +72,17 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
     var stride = 0;               // 0 = move forward size * sizeof(type) each iteration to get the next position
     var offset = 0;               // start at the beginning of the buffer
     gl.vertexAttribPointer(
-    colorLocation, size, type, normalize, stride, offset)
+      colorLocation,
+      size,
+      type,
+      normalize,
+      stride,
+      offset
+    );
+
+    // send position data
+    gl.enableVertexAttribArray(positionAttributeLocation);
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
     // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
     var size = 3; // 3 components per iteration
@@ -87,8 +98,6 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
       stride,
       offset
     );
-
-    setGeometry(gl);
 
     var primitiveType = gl.TRIANGLES;
     var offset = 0;

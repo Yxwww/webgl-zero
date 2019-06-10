@@ -161,3 +161,11 @@ export function makeZToVMatrix(fudgeFactor: number) {
     0, 0, 0, 1,
   ]
 }
+
+export function toRadians(degree: number) {
+  return degree * Math.PI / 180;
+}
+
+export function toDegree(radians: number) {
+  return radians * 180 / Math.PI;
+}

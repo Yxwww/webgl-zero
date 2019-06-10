@@ -1,5 +1,8 @@
 import { createPrograms, getGLRenderingContext } from "./app";
 import { drawScene } from "./scene";
+import {startRotation} from './store/actions';
+import {store} from './store';
+
 function createCanvas(): HTMLCanvasElement {
   const canvas = document.createElement("canvas");
   canvas.width = 800;
@@ -14,4 +17,6 @@ document.body.appendChild(canvas);
 
 const gl = getGLRenderingContext(canvas);
 const program = createPrograms(gl);
-drawScene(gl, program)();
+const draw = drawScene(gl, program);
+
+store.dispatch(startRotation()).subscribe(draw);

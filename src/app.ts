@@ -10,8 +10,6 @@ const fragShaderSrc = `
     // is responsible for setting
     gl_FragColor = v_color;
   }
- 
-
 `;
 
 const vertextShaderSrc = `

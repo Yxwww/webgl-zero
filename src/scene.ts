@@ -1,5 +1,14 @@
-import { projection, translate, xRotate, yRotate, zRotate, scale } from './math';
-import {geometry, color} from './data/f';
+import {
+  projection,
+  translate,
+  xRotate,
+  yRotate,
+  zRotate,
+  scale,
+  makeZToVMatrix,
+  m4,
+} from "./math";
+import { geometry, color } from "./data/f";
 
 function setColors(gl: WebGLRenderingContext) {
   gl.bufferData(gl.ARRAY_BUFFER, new Uint8Array(color), gl.STATIC_DRAW);
@@ -44,7 +53,7 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
 
     gl.useProgram(program);
 
-    const rotation = [0.51, 0.86, 0.3];
+    const rotation = [1, 0, 1];
     const translation = [50, 50, 50];
     const scaleVec = [0.51, 0.86, 1];
 
@@ -54,7 +63,8 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
     // gl.uniform2fv(scaleLocation, [0.51, 0.86]);
     // gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
-    let matrix = projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400);
+    let matrix = makeZToVMatrix(1);
+    matrix = m4.multiply(matrix, projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400));
     matrix = translate(matrix, translation[0], translation[1], translation[2]);
     matrix = xRotate(matrix, rotation[0]);
     matrix = yRotate(matrix, rotation[1]);

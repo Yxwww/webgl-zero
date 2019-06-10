@@ -105,7 +105,20 @@ export const m4 = {
         return dst;
     },
 
-};
+  orthographic: function(left: number, right: number, bottom: number, top: number, near: number, far: number) {
+    return [
+      2 / (right - left), 0, 0, 0,
+      0, 2 / (top - bottom), 0, 0,
+      0, 0, 2 / (near - far), 0,
+
+      (left + right) / (left - right),
+      (bottom + top) / (bottom - top),
+      (near + far) / (near - far),
+      1,
+    ];
+
+  }
+}
 
 export function translate(m: any, tx: number, ty: number, tz: number) {
     return m4.multiply(m, m4.translation(tx, ty, tz));

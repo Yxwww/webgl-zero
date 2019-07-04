@@ -35,7 +35,8 @@
         "redux": "^4.0.1",
         "redux-thunk": "^2.3.0",
         "reselect": "^4.0.0",
-        "rxjs": "^6.5.2"
+        "rxjs": "^6.5.2",
+        "wyx-utils": "^0.1.0"
     },
     "husky": {
         "hooks": {
@@ -43,6 +44,10 @@
         }
     },
     "lint-staged": {
+        "*.ts": [
+            "eslint --fix",
+            "git add"
+        ],
         "*.js": [
             "eslint --fix",
             "git add"

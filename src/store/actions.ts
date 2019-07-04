@@ -1,20 +1,19 @@
-import { interval } from 'rxjs';
-import { map } from 'ramda';
-import { tap } from 'rxjs/operators';
-import { CameraState, UPDATE_CAMERA, AppState, UpdateAction } from './index';
-import { ThunkAction } from 'redux-thunk';
-import { toRadians, toDegree } from '../math';
+import { interval } from "rxjs";
+import { map } from "ramda";
+import { tap } from "rxjs/operators";
+import { CameraState, UPDATE_CAMERA, AppState, UpdateAction } from "./index";
+import { ThunkAction } from "redux-thunk";
+import { toRadians, toDegree } from "../math";
 import { rotation } from "./selectors";
 
 export function updateCamera(state: Partial<CameraState>) {
   return {
     type: UPDATE_CAMERA,
-    state,
-  }
+    state
+  };
 }
 
 const TARGET_FPS = 30;
-
 export function startRotation(): any {
   return (dispatch: any, getState: any) => {
     return interval(1000 / TARGET_FPS).pipe(
@@ -22,7 +21,7 @@ export function startRotation(): any {
         const currentRotation = [...rotation(getState())];
         const newYaw = currentRotation[1] + 0.1;
         currentRotation[1] = newYaw;
-        console.log(currentRotation);
+        // console.log(currentRotation);
         dispatch(
           updateCamera({
             rotation: currentRotation
@@ -32,4 +31,3 @@ export function startRotation(): any {
     );
   };
 }
-

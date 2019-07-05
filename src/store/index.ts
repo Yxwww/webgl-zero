@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 const initial = {
   rotation: [1, 0, 1],
   translation: [50, 50, 50],
-  scaleVec: [0.51, 0.86, 1]
+  scaleVec: [0.51, 0.86, 1],
 };
 export type CameraState = typeof initial;
 
@@ -20,7 +20,7 @@ function camera(state = initial, action: UpdateAction) {
     case UPDATE_CAMERA: {
       return {
         ...state,
-        ...action.state
+        ...action.state,
       };
     }
     default: {
@@ -31,9 +31,9 @@ function camera(state = initial, action: UpdateAction) {
 
 export const store = createStore(
   combineReducers({
-    camera
+    camera,
   }),
-  applyMiddleware(thunk)
+  applyMiddleware(thunk),
 );
 
 export interface AppState {

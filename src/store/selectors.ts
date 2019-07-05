@@ -5,13 +5,13 @@ import { AppState, CameraState } from ".";
 export const camera: Selector<AppState, CameraState> = prop("camera");
 export const rotation = createSelector(
   camera,
-  prop("rotation")
+  prop("rotation"),
 );
 export const scaleVec = createSelector(
   camera,
-  prop("scaleVec")
+  prop("scaleVec"),
 );
 export const translation = createSelector(
   camera,
-  prop("translation")
+  prop("translation"),
 );

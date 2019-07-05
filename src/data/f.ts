@@ -317,7 +317,7 @@ export const geometry = [
   30,
   0,
   150,
-  0
+  0,
 ];
 
 export const color = [
@@ -639,5 +639,5 @@ export const color = [
   220,
   160,
   160,
-  220
+  220,
 ];

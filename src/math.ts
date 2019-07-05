@@ -88,7 +88,7 @@ export const m4 = {
     bottom: number,
     top: number,
     near: number,
-    far: number
+    far: number,
   ) {
     return [
       2 / (right - left),
@@ -107,9 +107,9 @@ export const m4 = {
       (left + right) / (left - right),
       (bottom + top) / (bottom - top),
       (near + far) / (near - far),
-      1
+      1,
     ];
-  }
+  },
 };
 
 export function translate(m: any, tx: number, ty: number, tz: number) {
@@ -150,7 +150,7 @@ export function projection(width: number, height: number, depth: number) {
     -1,
     1,
     0,
-    1
+    1,
   ];
 }
 

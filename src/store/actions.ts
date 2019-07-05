@@ -1,15 +1,14 @@
 import { interval } from "rxjs";
-import { map } from "ramda";
 import { tap } from "rxjs/operators";
 import { CameraState, UPDATE_CAMERA, AppState, UpdateAction } from "./index";
-import { ThunkAction } from "redux-thunk";
+// import { ThunkAction } from "redux-thunk";
 import { toRadians, toDegree } from "../math";
 import { rotation } from "./selectors";
 
 export function updateCamera(state: Partial<CameraState>) {
   return {
     type: UPDATE_CAMERA,
-    state
+    state,
   };
 }
 
@@ -24,10 +23,10 @@ export function startRotation(): any {
         // console.log(currentRotation);
         dispatch(
           updateCamera({
-            rotation: currentRotation
-          })
+            rotation: currentRotation,
+          }),
         );
-      })
+      }),
     );
   };
 }

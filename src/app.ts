@@ -37,7 +37,7 @@ const vertextShaderSrc = `
 function createProgram(
   gl: WebGLRenderingContext,
   vertexShader: WebGLShader,
-  fragmentShader: WebGLShader
+  fragmentShader: WebGLShader,
 ) {
   var program = gl.createProgram();
   gl.attachShader(program, vertexShader);
@@ -52,7 +52,7 @@ function createProgram(
 }
 
 export function getGLRenderingContext(
-  canvas: HTMLCanvasElement
+  canvas: HTMLCanvasElement,
 ): WebGLRenderingContext {
   return canvas.getContext("webgl");
 }

@@ -6,7 +6,7 @@ import {
   zRotate,
   scale,
   makeZToVMatrix,
-  m4
+  m4,
 } from "./math";
 import { geometry, color } from "./data/f";
 import { store } from "./store";
@@ -56,7 +56,7 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
     let matrix = makeZToVMatrix(1);
     matrix = m4.multiply(
       matrix,
-      projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400)
+      projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400),
     );
     matrix = translate(matrix, translation[0], translation[1], translation[2]);
     matrix = xRotate(matrix, rotation[0]);
@@ -80,7 +80,7 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
       type,
       normalize,
       stride,
-      offset
+      offset,
     );
 
     // send position data
@@ -99,7 +99,7 @@ export function drawScene(gl: WebGLRenderingContext, program: WebGLProgram) {
       type,
       normalize,
       stride,
-      offset
+      offset,
     );
 
     var primitiveType = gl.TRIANGLES;

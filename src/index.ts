@@ -1,20 +1,22 @@
-import { hereWeGo } from './app';
-function createCanvas(): HTMLCanvasElement {
-    const canvas = document.createElement('canvas');
-    canvas.width = 800;
-    canvas.height = 800;
-    canvas.style.border = '1px solid grey';
+import { createPrograms, getGLRenderingContext } from "./app";
+import { drawScene } from "./scene";
+import { startRotation } from "./store/actions";
+import { store } from "./store";
 
-    return canvas;
+function createCanvas(): HTMLCanvasElement {
+  const canvas = document.createElement("canvas");
+  canvas.width = 800;
+  canvas.height = 800;
+  canvas.style.border = "1px solid grey";
+
+  return canvas;
 }
 
 let canvas = createCanvas(); // Store the element to re-render on print.js changes
 document.body.appendChild(canvas);
 
-hereWeGo(canvas);
+const gl = getGLRenderingContext(canvas);
+const program = createPrograms(gl);
+const draw = drawScene(gl, program);
 
-if (module.hot) {
-    module.hot.accept('./app.tsx', function() {
-        console.log('Accepting the updated printMe module!');
-    })
-}
+store.dispatch(startRotation()).subscribe(draw);
